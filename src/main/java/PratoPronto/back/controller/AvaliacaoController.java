@@ -25,7 +25,7 @@ public class AvaliacaoController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable int id) {
+    public void delete(@PathVariable Long id) {
         avaliacaoService.deletar(id);
     }
 }
