@@ -21,7 +21,7 @@ public class ReceitaController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Receita> getById(@PathVariable int id) {
+    public Optional<Receita> getById(@PathVariable Long id) {
         return receitaService.buscarPorId(id);
     }
 
@@ -31,7 +31,7 @@ public class ReceitaController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable int id) {
+    public void delete(@PathVariable Long id) {
         receitaService.deletar(id);
     }
 }

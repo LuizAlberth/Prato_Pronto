@@ -5,7 +5,7 @@ import org.springframework.stereotype.Repository;
 import PratoPronto.back.model.Usuario;
 
 @Repository
-public interface UsuarioRepository extends JpaRepository<Usuario, Integer> {
+public interface UsuarioRepository extends JpaRepository<Usuario, Long> {
    
     Usuario findByEmail(String email);
 }

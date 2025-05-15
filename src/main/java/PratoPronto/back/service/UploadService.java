@@ -22,7 +22,7 @@ public class UploadService {
         return uploadRepository.save(upload);
     }
 
-        public void deletar(Integer id) {
+        public void deletar(Long id) {
         uploadRepository.deleteById(id);
     }
 }

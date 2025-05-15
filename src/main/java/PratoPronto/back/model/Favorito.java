@@ -1,18 +1,30 @@
 package PratoPronto.back.model;
 
-public class Favorito {
-    private int id;
-    private Usuario usuario; // Usuário que adicionou a receita aos favoritos
-    private Receita receita; // Receita que foi marcada como favorita
+import jakarta.persistence.*;
 
-    public Favorito(int id, Usuario usuario, Receita receita) {
-        this.id = id;
+@Entity
+public class Favorito {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    private Usuario usuario;
+
+    @ManyToOne
+    private Receita receita;
+
+    public Favorito() {}
+
+    public Favorito(Usuario usuario, Receita receita) {
         this.usuario = usuario;
         this.receita = receita;
     }
 
+
     // Getters
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -25,9 +37,6 @@ public class Favorito {
     }
 
     // Setters
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;

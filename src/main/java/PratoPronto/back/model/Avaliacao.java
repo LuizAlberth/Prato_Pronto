@@ -1,14 +1,28 @@
 package PratoPronto.back.model;
 
+
+import jakarta.persistence.*;
+
+@Entity
 public class Avaliacao {
-    private int id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private int nota;
     private String comentario;
-    private Usuario usuario; // Usuário que fez a avaliação
-    private Receita receita; // Receita que foi avaliada
 
-    public Avaliacao(int id, int nota, String comentario, Usuario usuario, Receita receita) {
-        this.id = id;
+    @ManyToOne
+    private Usuario usuario;
+
+    @ManyToOne
+    private Receita receita;
+
+    public Avaliacao() {}
+
+    public Avaliacao(int nota, String comentario, Usuario usuario, Receita receita) {
+
         this.nota = nota;
         this.comentario = comentario;
         this.usuario = usuario;
@@ -16,7 +30,7 @@ public class Avaliacao {
     }
 
     // Getters
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -37,9 +51,6 @@ public class Avaliacao {
     }
 
     // Setters
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public void setNota(int nota) {
         this.nota = nota;

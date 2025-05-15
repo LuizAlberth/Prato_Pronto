@@ -1,9 +1,10 @@
 package PratoPronto.back.controller;
 
 import java.util.List;
-import java.util.Optional;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import PratoPronto.back.model.Usuario;
@@ -21,9 +22,11 @@ public class UsuarioController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Usuario> getById(@PathVariable int id) {
-        return usuarioService.buscarPorId(id);
-    }
+    public ResponseEntity<Usuario> getById(@PathVariable Long id) {
+        return usuarioService.buscarPorId(id)
+            .map(ResponseEntity::ok)
+            .orElse(ResponseEntity.notFound().build());
+}
 
     @PostMapping
     public Usuario create(@RequestBody Usuario usuario) {
@@ -31,7 +34,7 @@ public class UsuarioController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable int id) {
+    public void delete(@PathVariable Long id) {
         usuarioService.deletar(id);
     }
 }

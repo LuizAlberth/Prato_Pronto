@@ -19,7 +19,7 @@ public class ReceitaService {
         return receitaRepository.findAll();
     }
 
-    public Optional<Receita> buscarPorId(Integer id) {
+    public Optional<Receita> buscarPorId(Long id) {
         return receitaRepository.findById(id);
     }
 
@@ -27,7 +27,7 @@ public class ReceitaService {
         return receitaRepository.save(receita);
     }
 
-    public void deletar(Integer id) {
+    public void deletar(Long id) {
         receitaRepository.deleteById(id);
     }
 }

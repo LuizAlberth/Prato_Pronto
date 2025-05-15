@@ -21,7 +21,7 @@ public class IngredienteController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Ingrediente> getById(@PathVariable int id) {
+    public Optional<Ingrediente> getById(@PathVariable Long id) {
         return ingredienteService.buscarPorId(id);
     }
 
@@ -31,7 +31,7 @@ public class IngredienteController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable int id) {
+    public void delete(@PathVariable Long id) {
         ingredienteService.deletar(id);
     }
 }

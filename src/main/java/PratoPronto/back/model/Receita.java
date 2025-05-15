@@ -2,20 +2,34 @@ package PratoPronto.back.model;
 
 import java.util.List;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Receita {
-    private int id;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     private String titulo;
     private String descricao;
     private String modoPreparo;
     private int tempoPreparo;
-    private Usuario idCozinheiro; // Referência ao Cozinheiro que criou a receita
-    private List<Ingrediente> ingredientes;
-    private List<Upload> uploads;
     private String dificuldade;
 
-    public Receita(int id, String titulo, String descricao, String modoPreparo, int tempoPreparo,
-                   Usuario idCozinheiro, List<Ingrediente> ingredientes, List<Upload> uploads, String dificuldade) {
-        this.id = id;
+    @ManyToOne
+    private Cozinheiro idCozinheiro;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Ingrediente> ingredientes;
+
+    @OneToMany(mappedBy = "receita", cascade = CascadeType.ALL)
+    private List<Upload> uploads;
+
+    public Receita() {}
+
+    public Receita(String titulo, String descricao, String modoPreparo, int tempoPreparo, Cozinheiro idCozinheiro,
+                   List<Ingrediente> ingredientes, List<Upload> uploads, String dificuldade) {
         this.titulo = titulo;
         this.descricao = descricao;
         this.modoPreparo = modoPreparo;
@@ -27,7 +41,7 @@ public class Receita {
     }
 
     // Getters
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -64,9 +78,7 @@ public class Receita {
     }
 
     // Setters
-    public void setId(int id) {
-        this.id = id;
-    }
+
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
@@ -82,10 +94,6 @@ public class Receita {
 
     public void setTempoPreparo(int tempoPreparo) {
         this.tempoPreparo = tempoPreparo;
-    }
-
-    public void setIdCozinheiro(Usuario idCozinheiro) {
-        this.idCozinheiro = idCozinheiro;
     }
 
     public void setIngredientes(List<Ingrediente> ingredientes) {

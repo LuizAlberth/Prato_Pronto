@@ -23,7 +23,7 @@ public class AvaliacaoService {
         return avaliacaoRepository.save(avaliacao);
     }
 
-    public void deletar(Integer id) {
+    public void deletar(Long id) {
         avaliacaoRepository.deleteById(id);
     }
 }

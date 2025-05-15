@@ -22,7 +22,7 @@ public class FavoritoService {
         return favoritoRepository.save(favorito);
     }
 
-    public void deletar(Integer id) {
+    public void deletar(Long id) {
         favoritoRepository.deleteById(id);
     }
 }

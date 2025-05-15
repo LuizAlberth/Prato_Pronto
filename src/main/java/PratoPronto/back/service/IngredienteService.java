@@ -19,7 +19,7 @@ public class IngredienteService {
         return ingredienteRepository.findAll();
     }
 
-    public Optional<Ingrediente> buscarPorId(Integer id) {
+    public Optional<Ingrediente> buscarPorId(Long id) {
         return ingredienteRepository.findById(id);
     }
 
@@ -27,7 +27,7 @@ public class IngredienteService {
         return ingredienteRepository.save(ingrediente);
     }
 
-     public void deletar(Integer id) {
+     public void deletar(Long id) {
         ingredienteRepository.deleteById(id);
     }
 }

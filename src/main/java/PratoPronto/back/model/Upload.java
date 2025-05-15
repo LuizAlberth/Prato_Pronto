@@ -1,18 +1,29 @@
 package PratoPronto.back.model;
 
-public class Upload {
-    private int id;
-    private String caminhoArquivo;
-    private Receita receita; // Referência à Receita à qual este upload pertence
+import jakarta.persistence.*;
 
-    public Upload(int id, String caminhoArquivo, Receita receita) {
-        this.id = id;
+@Entity
+public class Upload {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String caminhoArquivo;
+
+    @ManyToOne
+    private Receita receita;
+
+    public Upload() {}
+
+    public Upload(String caminhoArquivo, Receita receita) {
+        
         this.caminhoArquivo = caminhoArquivo;
         this.receita = receita;
     }
 
     // Getters
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -25,9 +36,6 @@ public class Upload {
     }
 
     // Setters
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public void setCaminhoArquivo(String caminhoArquivo) {
         this.caminhoArquivo = caminhoArquivo;
