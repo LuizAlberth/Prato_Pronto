@@ -4,14 +4,20 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import jakarta.validation.Valid;
 
 import PratoPronto.back.model.Receita;
 import PratoPronto.back.service.ReceitaService;
 
 @RestController
 @RequestMapping("/receitas")
+@Validated
 public class ReceitaController {
+
     @Autowired
     private ReceitaService receitaService;
 
@@ -26,11 +32,13 @@ public class ReceitaController {
     }
 
     @PostMapping
-    public Receita create(@RequestBody Receita receita) {
+    @ResponseStatus(HttpStatus.CREATED)
+    public Receita create(@Valid @RequestBody Receita receita) {
         return receitaService.salvar(receita);
     }
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     public void delete(@PathVariable Long id) {
         receitaService.deletar(id);
     }

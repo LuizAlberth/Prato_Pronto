@@ -1,6 +1,8 @@
 package PratoPronto.back.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 public class Ingrediente {
@@ -9,7 +11,12 @@ public class Ingrediente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "O nome do ingrediente é obrigatório.")
+    @Size(min = 2, max = 50, message = "O nome deve ter entre 2 e 50 caracteres.")
     private String nome;
+
+    @NotBlank(message = "A quantidade é obrigatória.")
+    @Size(max = 30, message = "A quantidade deve ter no máximo 30 caracteres.")
     private String quantidade;
 
     public Ingrediente() {}
@@ -33,7 +40,6 @@ public class Ingrediente {
     }
 
     // Setters
-
     public void setNome(String nome) {
         this.nome = nome;
     }

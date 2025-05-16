@@ -1,6 +1,7 @@
 package PratoPronto.back.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Favorito {
@@ -10,9 +11,11 @@ public class Favorito {
     private Long id;
 
     @ManyToOne
+    @NotNull(message = "Usuário deve ser informado")
     private Usuario usuario;
 
     @ManyToOne
+    @NotNull(message = "Receita deve ser informada")
     private Receita receita;
 
     public Favorito() {}
@@ -21,7 +24,6 @@ public class Favorito {
         this.usuario = usuario;
         this.receita = receita;
     }
-
 
     // Getters
     public long getId() {
@@ -37,7 +39,6 @@ public class Favorito {
     }
 
     // Setters
-
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }

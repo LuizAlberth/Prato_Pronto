@@ -28,6 +28,10 @@ public class IngredienteService {
     }
 
      public void deletar(Long id) {
-        ingredienteRepository.deleteById(id);
+        if (ingredienteRepository.existsById(id)) {
+            ingredienteRepository.deleteById(id);
+        } else {
+            throw new RuntimeException("Ingrediente com ID " + id + " não encontrado.");
+        }
     }
 }

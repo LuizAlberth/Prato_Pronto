@@ -1,8 +1,10 @@
 package PratoPronto.back.controller;
 
+import jakarta.validation.Valid;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import PratoPronto.back.model.Avaliacao;
@@ -20,12 +22,14 @@ public class AvaliacaoController {
     }
 
     @PostMapping
-    public Avaliacao create(@RequestBody Avaliacao avaliacao) {
-        return avaliacaoService.salvar(avaliacao);
+    public ResponseEntity<Avaliacao> create(@RequestBody @Valid Avaliacao avaliacao) {
+        Avaliacao salvo = avaliacaoService.salvar(avaliacao);
+        return ResponseEntity.ok(salvo);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         avaliacaoService.deletar(id);
+        return ResponseEntity.noContent().build();
     }
 }

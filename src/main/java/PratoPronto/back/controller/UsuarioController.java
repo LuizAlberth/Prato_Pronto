@@ -2,6 +2,7 @@ package PratoPronto.back.controller;
 
 import java.util.List;
 
+import jakarta.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +14,7 @@ import PratoPronto.back.service.UsuarioService;
 @RestController
 @RequestMapping("/usuarios")
 public class UsuarioController {
+
     @Autowired
     private UsuarioService usuarioService;
 
@@ -26,15 +28,17 @@ public class UsuarioController {
         return usuarioService.buscarPorId(id)
             .map(ResponseEntity::ok)
             .orElse(ResponseEntity.notFound().build());
-}
+    }
 
     @PostMapping
-    public Usuario create(@RequestBody Usuario usuario) {
-        return usuarioService.salvar(usuario);
+    public ResponseEntity<?> create(@RequestBody @Valid Usuario usuario) {
+        Usuario salvo = usuarioService.salvar(usuario);
+        return ResponseEntity.ok(salvo);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         usuarioService.deletar(id);
+        return ResponseEntity.noContent().build();
     }
 }

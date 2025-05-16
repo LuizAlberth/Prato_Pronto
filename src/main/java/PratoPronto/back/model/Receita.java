@@ -3,6 +3,7 @@ package PratoPronto.back.model;
 import java.util.List;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 @Entity
 public class Receita {
@@ -11,16 +12,30 @@ public class Receita {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "O título é obrigatório.")
+    @Size(max = 100, message = "O título deve ter no máximo 100 caracteres.")
     private String titulo;
+
+    @NotBlank(message = "A descrição é obrigatória.")
+    @Size(max = 500, message = "A descrição deve ter no máximo 500 caracteres.")
     private String descricao;
+
+    @NotBlank(message = "O modo de preparo é obrigatório.")
+    @Size(max = 1000, message = "O modo de preparo deve ter no máximo 1000 caracteres.")
     private String modoPreparo;
+
+    @Min(value = 1, message = "O tempo de preparo deve ser maior que 0.")
     private int tempoPreparo;
+
+    @NotBlank(message = "A dificuldade é obrigatória.")
     private String dificuldade;
 
     @ManyToOne
+    @NotNull(message = "O cozinheiro responsável é obrigatório.")
     private Cozinheiro idCozinheiro;
 
     @OneToMany(cascade = CascadeType.ALL)
+    @Size(min = 1, message = "A receita deve conter pelo menos um ingrediente.")
     private List<Ingrediente> ingredientes;
 
     @OneToMany(mappedBy = "receita", cascade = CascadeType.ALL)
@@ -78,8 +93,6 @@ public class Receita {
     }
 
     // Setters
-
-
     public void setTitulo(String titulo) {
         this.titulo = titulo;
     }
@@ -107,5 +120,4 @@ public class Receita {
     public void setDificuldade(String dificuldade) {
         this.dificuldade = dificuldade;
     }
-
 }

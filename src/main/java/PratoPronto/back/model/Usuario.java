@@ -1,6 +1,9 @@
 package PratoPronto.back.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -10,21 +13,25 @@ public abstract class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "O nome é obrigatório")
     private String nome;
+
+    @Email(message = "O e-mail deve ser válido")
+    @NotBlank(message = "O e-mail é obrigatório")
     private String email;
+
+    @NotBlank(message = "A senha é obrigatória")
+    @Size(min = 6, message = "A senha deve ter pelo menos 6 caracteres")
     private String senha;
 
-    // Construtor padrão (necessário para o JPA)
     public Usuario() {}
 
-    // Construtor com parâmetros
     public Usuario(String nome, String email, String senha) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
     }
 
-    // Getters e Setters
     public Long getId() {
         return id;
     }
@@ -57,7 +64,6 @@ public abstract class Usuario {
         this.senha = senha;
     }
 
-    // Métodos abstratos
     public abstract void buscarReceitaPorIngrediente();
     public abstract void avaliarReceita();
 

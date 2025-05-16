@@ -1,6 +1,7 @@
 package PratoPronto.back.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,13 @@ public class FavoritoService {
     }
 
     public Favorito salvar(Favorito favorito) {
+        Optional<Favorito> existente = favoritoRepository.findByUsuarioAndReceita(
+                favorito.getUsuario(), favorito.getReceita());
+
+        if (existente.isPresent()) {
+            throw new IllegalArgumentException("Esta receita já está nos favoritos do usuário.");
+        }
+
         return favoritoRepository.save(favorito);
     }
 

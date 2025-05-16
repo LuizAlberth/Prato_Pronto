@@ -9,9 +9,12 @@ import org.springframework.web.bind.annotation.*;
 import PratoPronto.back.model.Ingrediente;
 import PratoPronto.back.service.IngredienteService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/ingredientes")
 public class IngredienteController {
+
     @Autowired
     private IngredienteService ingredienteService;
 
@@ -26,7 +29,7 @@ public class IngredienteController {
     }
 
     @PostMapping
-    public Ingrediente create(@RequestBody Ingrediente ingrediente) {
+    public Ingrediente create(@Valid @RequestBody Ingrediente ingrediente) {
         return ingredienteService.salvar(ingrediente);
     }
 

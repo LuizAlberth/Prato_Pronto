@@ -30,4 +30,8 @@ public class ReceitaService {
     public void deletar(Long id) {
         receitaRepository.deleteById(id);
     }
+
+    public List<Receita> buscarPorTitulo(String titulo) {
+        return receitaRepository.findByTituloContaining(titulo);
+    }
 }
