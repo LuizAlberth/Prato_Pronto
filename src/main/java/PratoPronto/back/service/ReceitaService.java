@@ -19,7 +19,7 @@ public class ReceitaService {
         return receitaRepository.findAll();
     }
 
-    public Optional<Receita> buscarPorId(Long id) {
+    public Optional<Receita> getReceitaPorId(Long id) {
         return receitaRepository.findById(id);
     }
 
